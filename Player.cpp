@@ -15,9 +15,13 @@ namespace
 	};
 	PlayerState pState = PLAYER_IDLE;
 
+	//ラープの目標値
 	float targetAngle = 0.0f;
-	//回転にかかるフレーム
-	const float TURN_FRAME = 30.0f;
+	//ラープの初期値
+	float initAngle = 0.0f;
+	float turnFrame = 0.0f;
+	//45度回転するのにかかるフレーム
+	const float TURN_FRAME = 5.0f;
 }
 
 Player::Player(GameObject* parent)
@@ -47,6 +51,20 @@ void Player::Update()
 	//XMMATRIX translate = XMMatrixTranslation(1.0f, 0.0f, 0.0f);
 
 	//SetWorldMatrix(scale *  rotate * translate);
+
+	if (pState == PLAYER_TURN)
+	{
+		static int frame = 0;
+		frame++;
+		float t = frame / turnFrame;
+		transform_.rotate_.y = initAngle + (targetAngle - initAngle) * t;
+		if (targetAngle == transform_.rotate_.y)
+		{
+			pState = PLAYER_WALK;
+			frame = 0;
+		}
+		return;
+	}
 
 	XMVECTOR pos = XMLoadFloat3(&transform_.position_);
 	XMFLOAT3 move = XMFLOAT3(0, 0, 0);
@@ -79,19 +97,15 @@ void Player::Update()
 	if (pState == PLAYER_IDLE)return;
 
 	float currentAngleY = atan2f(move.x, move.z) * 180 / XM_PI + 180;
-	if (currentAngleY != prevAngleY)
+	if (abs(currentAngleY - prevAngleY) >= 45)
 	{
 		pState = PLAYER_TURN;
-		targetAngle = currentAngleY - prevAngleY;
+		targetAngle = currentAngleY;
+		initAngle = prevAngleY;
+		turnFrame = abs(currentAngleY - prevAngleY) * TURN_FRAME / 45 ;
 	}
-	if (pState == PLAYER_TURN)
-	{
-		static int count = 0;
-		count++;
-		transform_.rotate_.y += targetAngle / 30;
-		if (count >= 30)pState == PLAYER_IDLE; count = 0;
-		return;
-	}
+
+	if (pState == PLAYER_TURN)return;
 
 	transform_.rotate_.y = currentAngleY;
 	XMVECTOR vec = XMLoadFloat3(&move);
@@ -103,12 +117,12 @@ void Player::Update()
 
 void Player::Draw()
 {
-	if (pState == PLAYER_IDLE || pState == PLAYER_TURN)
+	if (pState == PLAYER_IDLE)
 	{
 		Model::SetTransform(hIdleModel, transform_);
 		Model::Draw(hIdleModel);
 	}
-	else if (pState == PLAYER_WALK)
+	else if (pState == PLAYER_WALK || pState == PLAYER_TURN)
 	{
 		Model::SetTransform(hWalkModel, transform_);
 		Model::Draw(hWalkModel);
