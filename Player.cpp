@@ -57,10 +57,14 @@ void Player::Update()
 		static int frame = 0;
 		frame++;
 		float t = frame / turnFrame;
-		transform_.rotate_.y = initAngle + (targetAngle - initAngle) * t;
-		if (targetAngle == transform_.rotate_.y)
+		float angle = targetAngle - initAngle;
+		if (angle > 180)angle = angle - 360;
+		else if (angle < -180)angle = angle + 360;
+		transform_.rotate_.y = initAngle + angle * t;
+		if (frame >= turnFrame)
 		{
 			pState = PLAYER_WALK;
+			transform_.rotate_.y = targetAngle;
 			frame = 0;
 		}
 		return;
@@ -102,7 +106,9 @@ void Player::Update()
 		pState = PLAYER_TURN;
 		targetAngle = currentAngleY;
 		initAngle = prevAngleY;
-		turnFrame = abs(currentAngleY - prevAngleY) * TURN_FRAME / 45 ;
+		float angle = abs(currentAngleY - prevAngleY);
+		if (angle > 180)angle = angle - 180;
+		turnFrame = angle * TURN_FRAME / 45 ;
 	}
 
 	if (pState == PLAYER_TURN)return;
