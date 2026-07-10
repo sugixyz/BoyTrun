@@ -1,30 +1,33 @@
 #pragma once
 #include "Engine/GameObject.h"
 
-
+class Ground;
 
 class Player :
     public GameObject
 {
-	//歩きアニメーションモデル
-	int hWalkModel;
-	//待機アニメーションモデル
-	int hIdleModel;
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
 	Player(GameObject* parent);
-
 	//初期化
 	void Initialize() override;
-
 	//更新
 	void Update() override;
-
 	//描画
 	void Draw() override;
-
 	//開放
 	void Release() override;
+	//地面のポインタを取得
+	void SetGround(Ground* g) { ground = g; }
+private:
+	//歩きアニメーションモデル
+	int hWalkModel;
+	//待機アニメーションモデル
+	int hIdleModel;
+	//地面のポインタ
+	Ground* ground;
+private:
+	bool CheckMap(const XMVECTOR& newPos);
 };
 

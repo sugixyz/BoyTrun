@@ -3,6 +3,8 @@
 #include "Engine/Debug.h"
 #include "TestScene.h"
 #include"Engine/Input.h"
+#include"Ground.h"
+#include"Engine/Debug.h"
 
 namespace
 {
@@ -22,6 +24,8 @@ namespace
 	float turnFrame = 0.0f;
 	//45ìxâÒì]Ç∑ÇÈÇÃÇ…Ç©Ç©ÇÈÉtÉåÅ[ÉÄ
 	const float TURN_FRAME = 5.0f;
+
+	std::vector < std::vector<int>> gMap;
 }
 
 Player::Player(GameObject* parent)
@@ -118,6 +122,7 @@ void Player::Update()
 	vec = XMVector3Normalize(vec);
 
 	pos = XMVectorAdd(pos, vec * SPEED);
+	if (CheckMap(pos))pos = XMVectorSubtract(pos, vec * SPEED);
 	XMStoreFloat3(&transform_.position_, pos);
 }
 
@@ -138,4 +143,21 @@ void Player::Draw()
 
 void Player::Release()
 {
+}
+
+bool Player::CheckMap(const XMVECTOR& newPos)
+{
+	gMap = ground->GetMapData();
+
+	XMFLOAT3 nPos;
+	XMStoreFloat3(&nPos, newPos);
+	int x, z;
+	x = (nPos.x + 10) / 2;
+	z = (-nPos.z +  10) / 2;
+	char str[50];
+	sprintf_s(str, sizeof(str), "( %d , %d )", x, z);
+	Debug::Log(str);
+
+	return gMap[z][x] == 1;
+
 }
