@@ -7,6 +7,7 @@ class Ground :
 	public GameObject
 {
 	int hSilly;
+	int hBlock;
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
