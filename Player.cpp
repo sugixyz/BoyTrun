@@ -154,9 +154,11 @@ bool Player::CheckMap(const XMVECTOR& newPos)
 	int x, z;
 	x = (nPos.x + 10) / 2;
 	z = (-nPos.z +  10) / 2;
-	char str[50];
-	sprintf_s(str, sizeof(str), "( %d , %d )", x, z);
-	Debug::Log(str);
+	if (x < 0 || 9 < x)return false;
+	if (z < 0 || 9 < z)return false;
+	//char str[50];
+	//sprintf_s(str, sizeof(str), "( %d , %d )", x, z);
+	//Debug::Log(str);
 
 	return gMap[z][x] == 1;
 
