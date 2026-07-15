@@ -2,6 +2,7 @@
 #include "Player.h"
 #include"Ground.h"
 #include"Enemy.h"
+//#include"Feed.h"
 #include"Engine/Camera.h"
 
 //コンストラクタ
@@ -13,9 +14,10 @@ TestScene::TestScene(GameObject * parent)
 //初期化
 void TestScene::Initialize()
 {	
-	Ground* g = Instantiate<Ground>(this);
 	Player* p = Instantiate <Player>(this);
 	Enemy* e = Instantiate<Enemy>(this);
+	Ground* g = Instantiate<Ground>(this);
+	//Feed* f = Instantiate<Feed>(this);
 	p->SetGround(g);
 
 	Camera::SetPosition(XMFLOAT3(0, 12, -20));

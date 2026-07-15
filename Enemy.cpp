@@ -2,7 +2,7 @@
 #include"Engine/Model.h"
 
 Enemy::Enemy(GameObject* parent)
-	:GameObject(parent), hModel(-1)
+	:GameObject(parent,"Enemy"), hModel(-1)
 {
 }
 

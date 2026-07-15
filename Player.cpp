@@ -29,10 +29,7 @@ namespace
 }
 
 Player::Player(GameObject* parent)
-	:GameObject(parent), hWalkModel(-1),hIdleModel(-1){
-	//swordDirには、初期方向として、ローカルモデルの剣の根っこから
-	//先端までのベクトルとして（0,1,0)を代入しておく
-	//初期位置は原点
+	:GameObject(parent,"Player"), hWalkModel(-1), hIdleModel(-1) {
 }
 
 void Player::Initialize()
