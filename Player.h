@@ -20,6 +20,7 @@ public:
 	void Release() override;
 	//地面のポインタを取得
 	void SetGround(Ground* g) { ground = g; }
+	void OnCollision(GameObject* pTarget) override;
 private:
 	//歩きアニメーションモデル
 	int hWalkModel;

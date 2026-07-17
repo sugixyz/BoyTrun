@@ -3,6 +3,7 @@
 #include"Player.h"
 #include"Enemy.h"
 #include"Feed.h"
+#include"PowerFeed.h"
 #include"Engine/CsvReader.h"
 
 namespace
@@ -10,6 +11,7 @@ namespace
 	int WALL_CSV = 1;
 	int PLAYER_CSV = 2;
 	int ENEMY_CSV = 3;
+	int POWER_FEED_CSV = 4;
 }
 
 Ground::Ground(GameObject* parent)
@@ -30,8 +32,6 @@ Ground::Ground(GameObject* parent)
 			if (value != WALL_CSV)
 			{
 				XMFLOAT3 pos = CalculatePosition(x, y);
-				Feed* f = Instantiate<Feed>(this);
-				f->SetPosition(pos);
 
 				if (value == PLAYER_CSV)
 				{
@@ -42,6 +42,20 @@ Ground::Ground(GameObject* parent)
 				{
 					GameObject* e = FindObject("Enemy");
 					e->SetPosition(pos);
+				}
+
+				pos.y = 0.5f;
+				if (value == POWER_FEED_CSV)
+				{
+					//PowerFeed* pf = Instantiate<PowerFeed>(this);
+					GameObject* pf = Instantiate<PowerFeed>(this);
+					pf->SetPosition(pos);
+				}
+				else
+				{
+					//Feed* f = Instantiate<Feed>(this);
+					GameObject* f = Instantiate<Feed>(this);
+					f->SetPosition(pos);
 				}
 			}
 		}

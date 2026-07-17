@@ -168,6 +168,7 @@
     <ClCompile Include="Feed.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PowerFeed.cpp" />
     <ClCompile Include="TestScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +200,7 @@
     <ClInclude Include="Feed.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PowerFeed.h" />
     <ClInclude Include="TestScene.h" />
   </ItemGroup>
   <ItemGroup>

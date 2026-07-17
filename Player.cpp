@@ -5,6 +5,7 @@
 #include"Engine/Input.h"
 #include"Ground.h"
 #include"Engine/Debug.h"
+#include"Engine/Collider.h"
 
 namespace
 {
@@ -39,6 +40,9 @@ void Player::Initialize()
 
 	hWalkModel = Model::Load("Walking.fbx");
 	Model::SetAnimFrame(hWalkModel, 0, 57, 1.0);
+
+	SphereCollider* col = new SphereCollider(XMFLOAT3(0, 0, 0), 0.75f);
+	AddCollider(col);
 }
 
 void Player::Update()
@@ -139,6 +143,10 @@ void Player::Draw()
 
 
 void Player::Release()
+{
+}
+
+void Player::OnCollision(GameObject* pTarget)
 {
 }
 

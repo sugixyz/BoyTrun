@@ -2,13 +2,13 @@
 #include "Engine/GameObject.h"
 #include<vector>
 
-class Feed :
+class PowerFeed :
 	public GameObject
 {
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
-	Feed(GameObject* parent);
+	PowerFeed(GameObject* parent);
 	//初期化
 	void Initialize() override;
 	//更新

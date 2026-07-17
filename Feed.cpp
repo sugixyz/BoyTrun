@@ -1,21 +1,22 @@
 #include "Feed.h"
 #include"Engine/Model.h"
+#include"Engine/Collider.h"
 
 Feed::Feed(GameObject* parent)
-	:GameObject(parent,"Feed"), hModel(-1)
+	:GameObject(parent,"Feed"), hModel(-1),score(1)
 {
-	transform_.position_.y = 0.1f;
 }
-
 
 void Feed::Initialize()
 {
 	hModel = Model::Load("Feed.fbx");
+
+	SphereCollider* col = new SphereCollider(XMFLOAT3(0, 0, 0), 0.2f);
+	AddCollider(col);
 }
 
 void Feed::Update()
 {
-	transform_.position_.y = 0.5f;
 }
 
 void Feed::Draw()
@@ -26,4 +27,12 @@ void Feed::Draw()
 
 void Feed::Release()
 {
+}
+
+void Feed::OnCollision(GameObject* pTarget)
+{
+	if (pTarget->GetObjectName() == "Player")
+	{
+		KillMe();
+	}
 }
