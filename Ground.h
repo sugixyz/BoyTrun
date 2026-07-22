@@ -18,6 +18,8 @@ public:
 	//開放
 	void Release() override;
 	std::vector<std::vector<int>>& GetMapData() { return map; }
+	void EatFeed() { feedCount--; }
+	void EatPowerFeed() { powerFeedCount--; }
 private:
 	int hSilly;
 	int hBlock;
@@ -26,5 +28,7 @@ private:
 	int mapHeight;
 private:
 	XMFLOAT3 CalculatePosition(int x, int y);
+	int feedCount;
+	int powerFeedCount;
 };
 

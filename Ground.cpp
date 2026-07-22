@@ -4,6 +4,7 @@
 #include"Enemy.h"
 #include"Feed.h"
 #include"PowerFeed.h"
+#include"Engine/Text.h"
 #include"Engine/CsvReader.h"
 
 namespace
@@ -15,7 +16,7 @@ namespace
 }
 
 Ground::Ground(GameObject* parent)
-	:GameObject(parent), hSilly(-1), hBlock(-1), mapHeight(-1), mapWidth(-1) 
+	:GameObject(parent), hSilly(-1), hBlock(-1), mapHeight(-1), mapWidth(-1),feedCount(0),powerFeedCount(0)
 {
 	CsvReader csv;
 	csv.Load("map.csv");
@@ -49,11 +50,13 @@ Ground::Ground(GameObject* parent)
 				{
 					GameObject* pf = Instantiate<PowerFeed>(this);
 					pf->SetPosition(pos);
+					powerFeedCount++;
 				}
 				else
 				{
 					GameObject* f = Instantiate<Feed>(this);
 					f->SetPosition(pos);
+					feedCount++;
 				}
 			}
 		}
