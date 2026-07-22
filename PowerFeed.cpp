@@ -1,6 +1,7 @@
 #include "PowerFeed.h"
 #include"Engine/Model.h"
 #include"TestScene.h"
+#include"Ground.h"
 
 PowerFeed::PowerFeed(GameObject* parent)
 	:GameObject(parent, "PowerFeed"), hModel(-1),score(5)
@@ -37,5 +38,7 @@ void PowerFeed::OnCollision(GameObject* pTarget)
 		KillMe();
 		TestScene* test = dynamic_cast<TestScene*>(FindObject("TestScene"));
 		test->AddScore(score);
+		Ground* g = dynamic_cast<Ground*>(this->GetParent());
+		g->EatPowerFeed();
 	}
 }

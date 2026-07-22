@@ -2,6 +2,7 @@
 #include"Engine/Model.h"
 #include"Engine/Collider.h"
 #include"TestScene.h"
+#include"Ground.h"
 
 Feed::Feed(GameObject* parent)
 	:GameObject(parent,"Feed"), hModel(-1),score(1)
@@ -37,6 +38,8 @@ void Feed::OnCollision(GameObject* pTarget)
 		KillMe();
 		TestScene* test = dynamic_cast<TestScene*>(FindObject("TestScene"));
 		test->AddScore(score);
+		Ground* g = dynamic_cast<Ground*>(this->GetParent());
+		g->EatFeed();
 
 	}
 }

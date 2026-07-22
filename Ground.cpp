@@ -67,6 +67,11 @@ void Ground::Initialize()
 {
 	hSilly = Model::Load("Ground.fbx");
 	hBlock = Model::Load("Block_Green.fbx");
+
+	feedText = new Text();
+	feedText->Initialize();
+	powerFeedText = new Text();
+	powerFeedText->Initialize();
 }
 
 void Ground::Update()
@@ -92,6 +97,14 @@ void Ground::Draw()
 			}
 		}
 	}
+
+	char feedT[20];
+	sprintf_s(feedT, sizeof(feedT), "FEED:%2d", feedCount);
+	feedText->Draw(40, 60, feedT);
+
+	char powerFeedT[30];
+	sprintf_s(powerFeedT, sizeof(powerFeedT), "POWER_FEED:%02d", powerFeedCount);
+	feedText->Draw(40, 90, powerFeedT);
 }
 
 void Ground::Release()

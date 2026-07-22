@@ -2,6 +2,8 @@
 #include "Engine/GameObject.h"
 #include<vector>
 
+class Text;
+
 class Ground :
 	public GameObject
 {
@@ -30,5 +32,7 @@ private:
 	XMFLOAT3 CalculatePosition(int x, int y);
 	int feedCount;
 	int powerFeedCount;
+	Text* feedText;
+	Text* powerFeedText;
 };
 
