@@ -47,13 +47,11 @@ Ground::Ground(GameObject* parent)
 				pos.y = 0.5f;
 				if (value == POWER_FEED_CSV)
 				{
-					//PowerFeed* pf = Instantiate<PowerFeed>(this);
 					GameObject* pf = Instantiate<PowerFeed>(this);
 					pf->SetPosition(pos);
 				}
 				else
 				{
-					//Feed* f = Instantiate<Feed>(this);
 					GameObject* f = Instantiate<Feed>(this);
 					f->SetPosition(pos);
 				}
