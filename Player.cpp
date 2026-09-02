@@ -26,6 +26,8 @@ namespace
 	//45ìxâÒì]Ç∑ÇÈÇÃÇ…Ç©Ç©ÇÈÉtÉåÅ[ÉÄ
 	const float TURN_FRAME = 5.0f;
 
+	const float RADIUS = 0.75f;
+
 	std::vector < std::vector<int>> gMap;
 }
 
@@ -123,7 +125,7 @@ void Player::Update()
 	vec = XMVector3Normalize(vec);
 
 	pos = XMVectorAdd(pos, vec * SPEED);
-	if (CheckMap(pos))pos = XMVectorSubtract(pos, vec * SPEED);
+	if (CheckMap(XMVectorAdd(pos,vec * RADIUS)))pos = XMVectorSubtract(pos, vec * SPEED);
 	XMStoreFloat3(&transform_.position_, pos);
 }
 
