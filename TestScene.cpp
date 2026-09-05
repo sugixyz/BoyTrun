@@ -22,12 +22,15 @@ void TestScene::Initialize()
 	Ground* g = Instantiate<Ground>(this);
 	//Feed* f = Instantiate<Feed>(this);
 	p->SetGround(g);
+	e->SetGround(g);
 
 	Camera::SetPosition(XMFLOAT3(0, 12, -20));
 	Camera::SetTarget(XMFLOAT3(0, 0, 0));
 
 	pText = new Text;
 	pText->Initialize();
+	
+	myScore = 0;
 }
 
 //更新

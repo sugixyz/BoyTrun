@@ -1,4 +1,4 @@
-#include "Player.h"
+ï»¿#include "Player.h"
 #include "Engine/Model.h"
 #include "Engine/Debug.h"
 #include "TestScene.h"
@@ -6,6 +6,7 @@
 #include"Ground.h"
 #include"Engine/Debug.h"
 #include"Engine/Collider.h"
+#include"Engine/SceneManager.h"
 
 namespace
 {
@@ -18,12 +19,12 @@ namespace
 	};
 	PlayerState pState = PLAYER_IDLE;
 
-	//ƒ‰[ƒv‚Ì–Ú•W’l
+	//ãƒ©ãƒ¼ãƒ—ã®ç›®æ¨™å€¤
 	float targetAngle = 0.0f;
-	//ƒ‰[ƒv‚Ì‰Šú’l
+	//ãƒ©ãƒ¼ãƒ—ã®åˆæœŸå€¤
 	float initAngle = 0.0f;
 	float turnFrame = 0.0f;
-	//45“x‰ñ“]‚·‚é‚Ì‚É‚©‚©‚éƒtƒŒ[ƒ€
+	//45åº¦å›žè»¢ã™ã‚‹ã®ã«ã‹ã‹ã‚‹ãƒ•ãƒ¬ãƒ¼ãƒ 
 	const float TURN_FRAME = 5.0f;
 
 	const float RADIUS = 0.75f;
@@ -49,15 +50,6 @@ void Player::Initialize()
 
 void Player::Update()
 {
-	//transform_.rotate_.y +=1;
-	//static float angle = 0.0;
-	//angle = angle + 0.3f;
-	//XMMATRIX scale = XMMatrixScaling(1.0f, 1.0f, 1.0f);
-	//XMMATRIX rotateX = XMMatrixRotationX(XMConvertToRadians(angle));
-	//XMMATRIX rotate = XMMatrixRotationY(XMConvertToRadians(angle));
-	//XMMATRIX translate = XMMatrixTranslation(1.0f, 0.0f, 0.0f);
-
-	//SetWorldMatrix(scale *  rotate * translate);
 
 	if (pState == PLAYER_TURN)
 	{
@@ -150,6 +142,11 @@ void Player::Release()
 
 void Player::OnCollision(GameObject* pTarget)
 {
+	if (pTarget->GetObjectName() == "Enemy")
+	{
+		SceneManager* sceneManager = (SceneManager*)(FindObject("SceneManager"));
+		sceneManager->ChangeScene(SCENE_ID_LOSE);
+	}
 }
 
 bool Player::CheckMap(const XMVECTOR& newPos)
