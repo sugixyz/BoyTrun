@@ -1,16 +1,16 @@
 ﻿#pragma once
+#pragma once
 #include "Engine/GameObject.h"
-#include "Engine/Model.h"
 
 class Text;
 
 //テストシーンを管理するクラス
-class TestScene : public GameObject
+class ResultScene : public GameObject
 {
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
-	TestScene(GameObject* parent);
+	ResultScene(GameObject* parent);
 	//初期化
 	void Initialize() override;
 	//更新
@@ -19,8 +19,14 @@ public:
 	void Draw() override;
 	//開放
 	void Release() override;
-	void AddScore(int score) { myScore += score; }
-	static int myScore;
+	void Win() { isWin = true; }
+	void Lose() { isWin = false; }
 private:
-	Text* pText;
+	int hImage;
+	Text* scoreT;
+	Text* text;
+	Text* titleT;
+	int gameScore;
+
+	bool isWin;
 };

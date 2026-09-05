@@ -1,4 +1,4 @@
-#include "Ground.h"
+﻿#include "Ground.h"
 #include"Engine/Model.h"
 #include"Player.h"
 #include"Enemy.h"
@@ -6,6 +6,7 @@
 #include"PowerFeed.h"
 #include"Engine/Text.h"
 #include"Engine/CsvReader.h"
+#include"Engine/SceneManager.h"
 
 namespace
 {
@@ -76,6 +77,11 @@ void Ground::Initialize()
 
 void Ground::Update()
 {
+	if (feedCount <= 0 && powerFeedCount <= 0)
+	{
+		SceneManager* sceneManager = (SceneManager*)(FindObject("SceneManager"));
+		sceneManager->ChangeScene(SCENE_ID_WIN);
+	}
 }
 
 void Ground::Draw()

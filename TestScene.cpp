@@ -1,4 +1,4 @@
-#include "TestScene.h"
+ï»¿#include "TestScene.h"
 #include "Player.h"
 #include"Ground.h"
 #include"Enemy.h"
@@ -6,13 +6,15 @@
 #include"Engine/Camera.h"
 #include"Engine/Text.h"
 
-//ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+int TestScene::myScore = 0;
+
+//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 TestScene::TestScene(GameObject * parent)
-	: GameObject(parent, "TestScene"),myScore(10)
+	: GameObject(parent, "TestScene")
 {
 }
 
-//‰Šú‰»
+//åˆæœŸåŒ–
 void TestScene::Initialize()
 {	
 	Player* p = Instantiate <Player>(this);
@@ -28,12 +30,12 @@ void TestScene::Initialize()
 	pText->Initialize();
 }
 
-//XV
+//æ›´æ–°
 void TestScene::Update()
 {
 }
 
-//•`‰æ
+//æç”»
 void TestScene::Draw()
 {
 	char scoreT[30];
@@ -41,8 +43,8 @@ void TestScene::Draw()
 	pText->Draw(20, 20, scoreT);
 }
 
-//ŠJ•ú
+//é–‹æ”¾
 void TestScene::Release()
 {
-	pText->Release();
+	//pText->Release();
 }
